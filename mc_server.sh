@@ -9,26 +9,26 @@ CLOUDFLARED_PKG_URL="https://github.com/cloudflare/cloudflared/releases/latest/d
 
 # cloudflaredがインストールされているか確認して、なければインストールする
 if ! command -v cloudflared &> /dev/null; then
-  echo -e "\e[0;34m[$LOG_NAME]\e[0m cloudflaredをインストールします。"
+  printf "\033[0;34m[$LOG_NAME]\033[0m cloudflaredをインストールします。\n"
   if command -v brew &> /dev/null; then
-    echo -e "\e[0;34m[$LOG_NAME]\e[0m Homebrew経由でインストールします。"
+    printf "\033[0;34m[$LOG_NAME]\033[0m Homebrew経由でインストールします。\n"
     brew install cloudflared
   else
-    echo -e "\e[0;34m[$LOG_NAME]\e[0m インストーラ形式でインストールします。"
+    printf "\033[0;34m[$LOG_NAME]\033[0m インストーラ形式でインストールします。\n"
     cd $(mktemp -d)
     curl -fL -O $CLOUDFLARED_PKG_URL
-    echo -e "\e[0;34m[$LOG_NAME]\e[0m パスワードの入力が求められるから入力してください。"
+    printf "\033[0;34m[$LOG_NAME]\033[0m パスワードの入力が求められるから入力してください。\n"
     sudo installer -pkg cloudflared-arm64.pkg -target /
   fi
 
   if ! command -v cloudflared &> /dev/null; then
-    echo -e "\e[0;34m[$LOG_NAME]\e[31m cloudflaredのインストールに失敗しました... 手動でインストールしてください。\e[0m"
+    printf "\033[0;34m[$LOG_NAME]\033[31m cloudflaredのインストールに失敗しました... 手動でインストールしてください。\033[0m\n"
     exit 1
   fi
-  echo -e "\e[0;34m[$LOG_NAME]\e[32m cloudflaredのインストールに成功しました。\e[0m"
+  printf "\033[0;34m[$LOG_NAME]\033[32m cloudflaredのインストールに成功しました。\033[0m\n"
 fi
 
 cd ~
-echo -e "\e[0;34m[$LOG_NAME]\e[0m Cloudflare Tunnelを起動します。"
-echo -e "\e[0;34m[$LOG_NAME]\e[0m minecraftで\e[1;33mlocalhost:$PORT\e[0mに接続してください。"
+printf "\033[0;34m[$LOG_NAME]\033[0m Cloudflare Tunnelを起動します。\n"
+printf "\033[0;34m[$LOG_NAME]\033[0m minecraftで\033[1;33mlocalhost:$PORT\033[0mに接続してください。\n"
 cloudflared access tcp --hostname $HOST_ADDRESS --url localhost:$PORT
