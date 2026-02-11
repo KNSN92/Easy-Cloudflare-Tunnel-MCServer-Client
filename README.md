@@ -1,6 +1,6 @@
 # Easy Cloudflare Tunnel MCServer Client
 
-MacOS向けのCloudflare Tunnel経由のminecraftサーバーへクライアント側が比較的容易に接続出来るようにする為のシェルスクリプトです。\
+Cloudflare Tunnel経由のminecraftサーバーへクライアント側が比較的容易に接続出来るようにする為のMacOS向けのシェルスクリプトです。\
 cloudflaredコマンドがインストールされていない場合には自動でインストールする機能付きです。\
 インストールする際にhomebrewがあればそちらを使います。賢いですね。
 
